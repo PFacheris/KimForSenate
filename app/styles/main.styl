@@ -1,0 +1,537 @@
+body-color = white
+
+grid-gutter = 50px
+
+topbar-height = 130px
+topbar-color = #0d202a
+
+accent-color = #49c7f3
+
+breakpoint-small = "all and (max-width: 640px)"
+breakpoint-medium = "all and (max-width: 1170px) and (min-width: 640px)"
+breakpoint-large = "all and (min-width: 1170px)"
+
+@import "../bower_components/nib/index.styl"
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700)
+@import url(http://fonts.googleapis.com/css?family=Podkova:400,700)
+@import url('http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700')
+
+*
+  box-sizing(border-box)
+
+body
+  margin: 0
+  background: body-color
+  min-width: 990px
+
+.contain-to-grid
+  padding-left: grid-gutter
+  padding-right: grid-gutter
+
+h1,h2,h3,h4,h5,h6
+  font-family: 'Podkova', serif
+  font-weight: 700
+  color: topbar-color
+  margin-top: 0
+
+p, small, a
+  font-family: 'Raleway', sans-serif;
+  text-decoration:none
+
+small
+  font-size: 10px
+
+input
+  font-size: 130%;
+  line-height: 36px;
+  margin: 0;
+  padding-left: 12px;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.75);
+  opacity: .9;
+  font-family: 'Podkova';
+
+  &.error
+    border: 1px solid #C95151 !important
+
+header
+  header-vertical-padding = 10px
+
+  position: absolute
+  z-index: 1
+  top: 0px
+  height: topbar-height
+  width: 100%
+  background: topbar-color
+  padding-top: header-vertical-padding
+  padding-bottom: header-vertical-padding
+  min-width: 990px
+  border-bottom: 1px solid darken(topbar-color, 10%)
+
+  .logo
+    float: left
+    width: 30%
+
+    .image
+      top: 10px
+      left: 50px
+      position: absolute
+      transition-property(top, left, height)
+      transition-duration(.3s)
+
+    .text
+      position: absolute
+      left: 165px
+      transition(opacity, .3s)
+
+  .navigation
+    float: right
+    width: 70%
+    position: relative
+    top: 67px
+
+    .pull-right
+      float:right
+
+    .btn
+      margin: 15px 25px
+    
+    a.link
+      position: relative;
+      display: inline-block;
+      margin: 15px 25px;
+      outline: none;
+      color: accent-color
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      padding: 0 0 10px
+      transition-property(color, text-shadow)
+      transition-duration(.3s)
+
+      &:after
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #fff;
+        content: '';
+        opacity: 0;
+        transition-property(height, transform, opacity)
+        transition-duration(.3s)
+        transform(translateY(-10px))
+      
+      &:hover
+        color: #fff
+        text-shadow: 0 0 1px rgba(255,255,255,0.3);
+        &:after
+          height: 3px
+          opacity: 1
+          transform(translateY(0px))
+
+  .fold
+    position: absolute
+    top: 0
+    height: topbar-height + 20
+    background: lighten(topbar-color,5%)
+    width: 30px
+    z-index: 2
+    transition-property(top, left, right)
+    transition-duration(.3s)
+
+    &:before
+      content: ''
+      position: absolute
+      z-index: 3
+      top: 0px
+      width: 0px
+      height: 0px
+      border-style: solid;
+
+    &:after
+      content: ''
+      position: absolute
+      z-index: 2
+      top: 0px
+      width: 10px
+      height: 20px
+      background: body-color
+
+    &.left
+      left: 0
+      &:before
+        left: 10px
+        border-color: topbar-color transparent transparent darken(topbar-color, 50%)
+        border-width: 20px 0 0 20px
+
+    &.right
+      right: 0
+      &:before
+        right: 10px
+        border-color: transparent transparent darken(topbar-color, 50%) topbar-color
+        border-width: 0 0 20px 20px
+      &:after
+        right:0
+
+  &.affix
+    position: fixed
+    top: -76px
+
+    .logo
+      .image
+        top: 81px;
+        height: 45px;
+        left: 84px;
+      .text
+        opacity: 0;
+
+    .fold
+      &.left
+        left: -30px
+        top: -20px
+      &.right
+        right: -30px
+        top: -20px
+
+.btn
+  opacity: 1
+  cursor: pointer
+  background: #C95151
+  height: 40px
+  padding: 20px 10px
+  color: white
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center
+  vertical-align: middle
+  border: none
+  border-radius(0px)
+
+  &:hover
+    background: darken(#C95151, 10%)
+      
+.content
+  position: relative
+  top: topbar-height
+  z-index: 0
+
+.row
+  width: 100%
+  overflow:auto
+  border-bottom: 1px solid rgba(0,0,0,.25)
+
+  .col
+    float: left
+    width: 50%
+    padding:30px
+
+.gallery
+  img
+    width: 100%
+    overflow:hidden
+    border: 3px solid white;
+    border-radius: 3px
+
+  .header
+    color: white;
+    font-size: 3.5em;
+    margin-bottom: 10px
+    text-shadow: black 2px 2px;
+    transition(font-size, .3s)
+
+    @media breakpoint-medium
+      font-size: 3em;
+      text-shadow: black 1px 1px;
+
+  .subheader
+    color: white
+    font-size: 2em;
+    margin-bottom: 10%
+    margin-top: 0
+    text-shadow: black 2px 2px;
+    transition(font-size, .3s)
+
+    @media breakpoint-medium
+      font-size: 1.5em;
+
+  input:not(.btn)
+    width: 60%;
+    &:nth-child(2)
+      width: 35%
+
+  .btn
+    position: relative
+    height: auto
+    margin-top: 10px
+
+.row.divider
+  background: linear-gradient(-45deg, accent-color 0%,accent-color 24.9%,darken(accent-color,20%) 25%,darken(accent-color,20%) 74.9%,accent-color 75%,accent-color 100%)
+  height:25px
+
+.extra
+  background: url('/images/husk.png')
+
+  .group
+    overflow: auto
+    transition(padding, .3s)
+
+    .item
+      width: 33%
+      float: left
+      padding: 30px 15px
+
+      &:first-child
+        padding-left: 30px
+
+      &:last-child
+        padding-right: 30px
+
+  social-icon-size = 71px
+  .tweets
+    float: left
+    width: 70%;
+    width: -webkit-calc(100% - 90px);
+    width: -moz-calc(100% - 90px);
+    width: calc(100% - 90px);
+    height: 360px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0px 1px 8px rgba(0,0,0,.25);
+    padding: 10px
+
+    .tweet-header
+      position: relative
+      height: 20%
+      background: accent-color
+      padding: 5px
+
+      .tweet-header-text
+        width: 80%
+        float:right
+
+        h3, p
+          font-family: 'Raleway', sans-serif
+          text-align: right
+          color:white
+          margin: 0
+          text-shadow:0px 1px 1px rgba(65,65,65,0.95)
+
+        p
+          font-size: 13px
+          margin-top: 5px
+
+        @media breakpoint-medium
+          h3
+            font-size: 15px
+          p
+            font-size: 11px
+
+      .tweet-logo
+        position: absolute;
+        height: 67px;
+        width: 67px;
+        top: 0;
+        background: darken(accent-color, 25%)
+
+        &:after
+          content: '';
+          height: 40px;
+          width: 40px;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+          border: 3px solid #fff;
+          position: absolute;
+          top: 11px;
+          left: 11px;
+
+        i
+          font-size: 34px;
+          margin-left: 11px;
+          color: #fff;
+          line-height: 72px;
+
+  .extra-container
+    box-shadow(0px 1px 8px rgba(0,0,0,.25))
+    
+    .crop
+      height: 250px
+      overflow:hidden
+      border: 3px solid white;
+      border-bottom:none;
+      border-radius: 3px
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+
+    .label
+      position:relative
+      background: darken(accent-color,10%)
+      border: 3px solid white;
+      padding-bottom:15px
+
+      &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: -webkit-calc(50% - 20px)
+        left: -moz-calc(50% - 20px)
+        left: calc(50% - 20px)
+        height: 0
+        width: 0
+        border-style: solid;
+        border-width:20px 20px 0 20px
+        border-color: white transparent transparent transparent
+
+      h2, p
+        text-align:center
+        color:white
+        text-shadow: 0px 1px 1px rgba(65,65,65,0.95)
+
+      h2
+        margin-bottom: 5px;
+        margin-top: 30px;
+
+      p
+        margin-top: 0
+        font-size: 12px
+
+.social
+  float: left
+  width: social-icon-size
+  margin: 0
+  padding: 0
+  padding-left: 20px
+  
+  li
+    list-style: none
+
+  .social-action
+    height: social-icon-size;
+    width: social-icon-size;
+    border-radius: 1px;
+    float: left;
+    &.facebook
+      background: #3B5998
+    &.twitter
+      background: #00b0ed
+    &.gplus
+      background: #d43806
+    &.youtube
+      background: #cd201f
+    &.email
+      background: #40B345
+
+    i
+      font-size: 50px;
+      color: white;
+      line-height: 75px;
+
+footer
+  padding-bottom: 20px
+  .summary
+    padding: 20px 30px
+    height: 300px
+    background: url('/images/capitol_bg.jpg')
+    background-repeat: no-repeat
+    background-position-x: 43%
+    background-position-y: 0%
+    background-size: 685px
+    background-color: topbar-color
+    border-top: 1px solid darken(topbar-color, 10%)
+    border-bottom: 2px solid rgba(0,0,0,.5)
+
+    .links
+      float: left;
+      .sitemap, .connect
+        float: left
+        margin-left: 50px;
+        margin-top: 20px;
+        h5
+          color: accent-color
+          font-family: 'Raleway', sans-serif
+          margin-bottom: 5px
+        ul
+          list-style: none;
+          color: white;
+          font-size: 13px;
+          padding: 0;
+          margin: 0;
+
+      .donate
+        margin-left: 50px;
+        margin-top: 192px;
+
+        .btn
+          height: auto
+          display: block
+
+    .email-updates
+      width: 30%
+      float: right
+      margin-right: 50px
+      margin-top: 20px
+
+      h5
+        color: accent-color
+        font-family: 'Raleway', sans-serif
+        margin-bottom: 5px
+
+      input:not(.btn)
+        &:nth-child(1)
+          width: 55%
+        &:nth-child(2)
+          width: 42%
+
+      .btn
+        display:block
+        height: auto
+        margin-top: 5px
+        width: 98%
+
+  .disclaimers-container
+    padding: 0 30px
+    overflow: auto
+    .disclaimer-license
+      float:left
+      text-align: left
+      small.disclaimer
+        display: inline-block;
+        padding: 5px;
+        border: 1px solid topbar-color;
+        text-transform: uppercase;
+        color: topbar-color
+        margin: 15px 0
+      small.license
+        display: block
+        font-size: 11px
+        color: #c0c0c0
+    .disclaimer-links
+      float:right
+      text-align: right
+      ul
+        list-style: none
+        text-transform: uppercase
+        margin-top: 20px;
+        font-size: 14px;
+        li
+          display: inline-block
+          a
+            color: #c0c0c0
+            &:after
+              content: '/'
+              margin: 0 15px
+
+          &:last-child
+            a
+              &:after
+                content: ''
+                margin: 0
+
+@import "_about.styl"
+@import "_volunteer.styl"
+@import "_font.styl"

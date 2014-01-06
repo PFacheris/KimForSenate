@@ -1,0 +1,66 @@
+// Footer
+footer
+  .summary
+    .links
+      .sitemap
+        h5 SITE MAP
+        ul
+          li
+            a Home
+          li
+            a About
+          li
+            a Volunteer
+          li
+            a Donate
+      .connect
+        h5 CONNECT
+        ul
+          li
+            a Facebook
+          li
+            a Twitter
+          li
+            a Google+
+          li
+            a YouTube
+          li
+            a Email
+      .donate
+        a.btn DONATE
+    .email-updates
+      h5 SIGN UP FOR EMAIL UPDATES
+      #mc_embed_signup
+        form#mc-embedded-subscribe-form-footer.validate(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
+          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='Email Address*')
+          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP Code*')
+          #mce-responses.clear
+            #mce-error-response.response(style='display: none;')
+            #mce-success-response.response(style='display: none;')
+          div(style='position: absolute; left: -5000px;')
+            input(type='text', name='b_3f93b7784bc7878da686ff32e_11ec600eb3', value='')
+            input(id='mce-group[6521]-6521-0', type='checkbox', value='1', name='group[6521][1]')
+            input(id='mce-group[6521]-6521-1', type='checkbox', value='2', name='group[6521][2]')
+            input(id='mce-group[6521]-6521-2', type='checkbox', value='4', name='group[6521][4]', checked)
+          .clear
+            input#mc-embedded-subscribe.btn(type='submit', value='SUBMIT', name='subscribe')
+  .disclaimers-container
+    .disclaimer-license
+      small.disclaimer Paid for by Harry Kim for Senate Committee
+      small.license © 2014 Harry Kim for Senate. All Rights Reserved.
+      small.license Design by Patrick Facheris
+    .disclaimer-links
+      ul
+        li
+          a Privacy
+        li
+          a Contact
+
+// build:js /scripts/main.js
+
+script(src='/bower_components/jquery/jquery.js')
+script(src='/bower_components/jquery.validation/jquery.validate.js')
+script(src='/bower_components/jquery.validation/additional-methods.js')
+script(src='/scripts/main.js')
+
+// endbuild

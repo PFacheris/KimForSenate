@@ -1,0 +1,25 @@
+extends /layouts/_default
+
+block content
+  .gallery.volunteer-container(style="background:url('http://upload.wikimedia.org/wikipedia/commons/e/ef/Texas_Bluebonnets_(7066452003).jpg');background-repeat:no-repeat;background-position-y:0px;background-size:cover")
+    .volunteer
+      h1 Volunteer with Us
+      p We'll let you know how you can help, just fill out the form below.
+      #mc_embed_signup
+        form#mc-embedded-subscribe-form.validate(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
+          input#mce-FNAME(type='text', value='', name='FNAME', placeholder='First Name')
+          input#mce-LNAME(type='text', value='', name='LNAME', placeholder='Last Name')
+          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP Code*')
+          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='Email Address*')
+          input#mce-PHONE(type='text', value='', name='PHONE', placeholder='Phone Number')
+          #mce-responses.clear
+            #mce-error-response.response(style='display: none;')
+            #mce-success-response.response(style='display: none;')
+          div(style='position: absolute; left: -5000px;')
+            input(type='text', name='b_3f93b7784bc7878da686ff32e_11ec600eb3', value='')
+            input(id='mce-group[6521]-6521-0', type='checkbox', value='1', name='group[6521][1]')
+            input(id='mce-group[6521]-6521-1', type='checkbox', value='2', name='group[6521][2]', checked)
+            input(id='mce-group[6521]-6521-2', type='checkbox', value='4', name='group[6521][4]')
+          .clear
+            input#mc-embedded-subscribe.btn(type='submit', value='SUBMIT', name='subscribe')
+

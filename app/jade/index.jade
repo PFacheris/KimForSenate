@@ -1,0 +1,67 @@
+extends /layouts/_default
+
+block content
+  .row.gallery(style="background:url('/images/corn_bg.jpg');background-repeat:no-repeat;background-position-y:-150px;background-size:100%")
+    .col
+      img(src="/images/kim2.png")
+    .col
+      h1.header Working for Texas
+      p.subheader Join Harry in his campaign to fix the goverment, just as he's been fixing people for years.
+      #mc_embed_signup
+        form#mc-embedded-subscribe-form-footer.validate(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
+          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='EMAIL ADDRESS*')
+          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP CODE*')
+          #mce-responses.clear
+            #mce-error-response.response(style='display: none;')
+            #mce-success-response.response(style='display: none;')
+          div(style='position: absolute; left: -5000px;')
+            input(type='text', name='b_3f93b7784bc7878da686ff32e_11ec600eb3', value='')
+            input(id='mce-group[6521]-6521-0', type='checkbox', value='1', name='group[6521][1]')
+            input(id='mce-group[6521]-6521-1', type='checkbox', value='2', name='group[6521][2]')
+            input(id='mce-group[6521]-6521-2', type='checkbox', value='4', name='group[6521][4]', checked)
+          .clear
+            input#mc-embedded-subscribe.btn(type='submit', value='JOIN THE CAMPAIGN', name='subscribe')
+  .row.divider
+
+  .row.extra
+    .group
+      .item
+        .extra-container
+          .crop(style="background:url('/images/education.jpg');background-size:cover;")
+          .label
+            h2 LOOKING FORWARD
+            p Read more about Harry's views on education and the environment.
+      .item
+        .extra-container
+          .crop(style="background:url('/images/america.jpg');background-size:cover;background-position:center")
+          .label
+            h2 AMERICAN DREAM
+            p Check out how you can help Harry fight for equality and economic growth.
+      .item
+        .tweets
+          .tweet-header
+            .tweet-header-text
+              h3 Harry Kim
+              p Twitter Feed
+            .tweet-logo
+              i.icon-twitter
+          a.twitter-timeline(href='https://twitter.com/PLFacheris', data-widget-id='419529381241839616',  data-chrome="noheader noscrollbar transparent") Tweets by @PLFacheris
+          script
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+        ul.social
+          li
+            a.social-action.facebook
+              i.icon-facebook
+          li
+            a.social-action.twitter
+              i.icon-twitter
+          li
+            a.social-action.gplus
+              i.icon-gplus
+          li
+            a.social-action.youtube
+              i.icon-youtube
+          li
+            a.social-action.email
+              i.icon-email

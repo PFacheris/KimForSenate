@@ -1,0 +1,101 @@
+.video-container
+  padding: 30px
+
+  .video-wrapper
+    width: 65%;
+    position: relative;
+    margin: auto
+
+    &:after
+      padding-top: 56.25%; /*16:9 ratio*/
+      display: block;
+      content: '';
+
+    .social
+      position: relative
+      left: -90px
+    
+    .video-play
+      position: absolute;
+      top: 0; bottom: 0; right: 0; left: 0; /*fill parent*/
+      background: black
+      border: 3px solid white
+      border-radius(3px)
+      text-align:center
+
+      .video-icon-wrapper
+        display:table
+        width:100%
+        height: 100%
+        h3
+          position: absolute
+          top: 20%
+          width: 100%
+          text-align: center
+          color: white
+          font-size: 150%
+          font-family: 'Raleway', sans-serif
+
+        i
+          display: table-cell
+          vertical-align: middle
+          font-size: 80px
+          color: white
+
+.background
+  height: 300px
+  display: table
+
+  .background-container
+    display: table-cell
+    vertical-align: middle
+
+  .quote
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 50px; 
+    text-shadow: black 2px 2px
+    text-transform: uppercase
+  .attribution
+    position: relative
+    margin:auto
+    width: 185px
+    height: 50px
+    line-height: 50px
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-family: 'Raleway', sans-serif
+    text-shadow: black 2px 2px
+
+    &:before, &:after
+      content:''
+      position: absolute
+      left: 0
+      width:100%
+      height:3px
+      background:white
+      box-shadow: 2px 2px 0px black
+
+    &:before
+      top: 0
+    &:after
+      bottom: 0
+
+.bio
+  margin: 30px 14%
+  margin-right: 45%
+
+  h1, h2
+    font-weight: 400
+    color: darken(accent-color, 20%)
+  h1
+    font-size: 44px
+
+  h2
+    font-size: 32px
+  p
+    font-family: 'Alegreya Sans', sans-serif
+    margin-bottom: 35px
+    color: #5c5c5c
