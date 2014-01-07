@@ -8,9 +8,9 @@ block content
       h1.header Working for Texas
       p.subheader Join Harry in his campaign to fix the goverment, just as he's been fixing people for years.
       #mc_embed_signup
-        form#mc-embedded-subscribe-form-footer.validate(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
-          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='EMAIL ADDRESS*')
-          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP CODE*')
+        form#mc-embedded-subscribe-form-footer.mailchimp(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
+          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='EMAIL ADDRESS*', parsley-required='true', , parsley-type='email')
+          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP CODE*', parsley-required='true', parsley-zipcode='true')
           #mce-responses.clear
             #mce-error-response.response(style='display: none;')
             #mce-success-response.response(style='display: none;')
@@ -26,17 +26,19 @@ block content
   .row.extra
     .group
       .item
-        .extra-container
-          .crop(style="background:url('/images/education.jpg');background-size:cover;")
-          .label
-            h2 LOOKING FORWARD
-            p Read more about Harry's views on education and the environment.
+        a(href='/about.html')
+          .extra-container
+            .crop(style="background:url('/images/education.jpg');background-size:cover;")
+            .label
+              h2 LOOKING FORWARD
+              p Read more about Harry's views on education and the environment.
       .item
-        .extra-container
-          .crop(style="background:url('/images/america.jpg');background-size:cover;background-position:center")
-          .label
-            h2 AMERICAN DREAM
-            p Check out how you can help Harry fight for equality and economic growth.
+        a(href='/volunteer.html')
+          .extra-container
+            .crop(style="background:url('/images/america.jpg');background-size:cover;background-position:center")
+            .label
+              h2 AMERICAN DREAM
+              p Check out how you can help Harry fight for equality and economic growth.
       .item
         .tweets
           .tweet-header

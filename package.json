@@ -23,7 +23,8 @@
     "grunt-concurrent": "~0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "jshint-stylish": "0.1.4",
-    "time-grunt": "0.2.3"
+    "time-grunt": "0.2.3",
+    "grunt-php": "~0.3.2"
   },
   "engines": {
     "node": ">=0.10.0"

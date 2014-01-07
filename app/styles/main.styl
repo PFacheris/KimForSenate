@@ -12,9 +12,6 @@ breakpoint-medium = "all and (max-width: 1170px) and (min-width: 640px)"
 breakpoint-large = "all and (min-width: 1170px)"
 
 @import "../bower_components/nib/index.styl"
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,700)
-@import url(http://fonts.googleapis.com/css?family=Podkova:400,700)
-@import url('http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700')
 
 *
   box-sizing(border-box)
@@ -37,6 +34,7 @@ h1,h2,h3,h4,h5,h6
 p, small, a
   font-family: 'Raleway', sans-serif;
   text-decoration:none
+  color: inherit
 
 small
   font-size: 10px
@@ -52,7 +50,7 @@ input
   opacity: .9;
   font-family: 'Podkova';
 
-  &.error
+  &.parsley-error
     border: 1px solid #C95151 !important
 
 header
@@ -215,6 +213,11 @@ header
 
   &:hover
     background: darken(#C95151, 10%)
+
+  &.disabled
+    background: #BDBDBD
+    color: lighten(#BDBDBD, 40%)
+    cursor: default
       
 .content
   position: relative
@@ -275,7 +278,7 @@ header
   height:25px
 
 .extra
-  background: url('/images/husk.png')
+  background: url('../images/husk.png')
 
   .group
     overflow: auto
@@ -299,7 +302,7 @@ header
     width: -webkit-calc(100% - 90px);
     width: -moz-calc(100% - 90px);
     width: calc(100% - 90px);
-    height: 360px;
+    height: 374px;
     background: white;
     border-radius: 3px;
     box-shadow: 0px 1px 8px rgba(0,0,0,.25);
@@ -334,8 +337,8 @@ header
 
       .tweet-logo
         position: absolute;
-        height: 67px;
-        width: 67px;
+        height: 71px;
+        width: 71px;
         top: 0;
         background: darken(accent-color, 25%)
 
@@ -347,20 +350,20 @@ header
           border-radius: 50%;
           border: 3px solid #fff;
           position: absolute;
-          top: 11px;
-          left: 11px;
+          top: 13px;
+          left: 13px;
 
         i
           font-size: 34px;
-          margin-left: 11px;
+          margin-left: 13px;
           color: #fff;
-          line-height: 72px;
+          line-height: 77px;
 
   .extra-container
     box-shadow(0px 1px 8px rgba(0,0,0,.25))
     
     .crop
-      height: 250px
+      height: 264px
       overflow:hidden
       border: 3px solid white;
       border-bottom:none;
@@ -417,14 +420,24 @@ header
     float: left;
     &.facebook
       background: #3B5998
+      &:hover
+        background: darken(#3B5998, 10%)
     &.twitter
       background: #00b0ed
+      &:hover
+        background: darken(#00b0ed, 10%)
     &.gplus
       background: #d43806
+      &:hover
+        background: darken(#d43806, 10%)
     &.youtube
       background: #cd201f
+      &:hover
+        background: darken(#cd201f, 10%)
     &.email
       background: #40B345
+      &:hover
+        background: darken(#40B345, 10%)
 
     i
       font-size: 50px;
@@ -436,7 +449,7 @@ footer
   .summary
     padding: 20px 30px
     height: 300px
-    background: url('/images/capitol_bg.jpg')
+    background: url('../images/capitol_bg.jpg')
     background-repeat: no-repeat
     background-position-x: 43%
     background-position-y: 0%
@@ -534,4 +547,6 @@ footer
 
 @import "_about.styl"
 @import "_volunteer.styl"
+@import "_donate.styl"
+@import "_thanks.styl"
 @import "_font.styl"

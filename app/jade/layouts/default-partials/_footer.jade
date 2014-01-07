@@ -6,13 +6,13 @@ footer
         h5 SITE MAP
         ul
           li
-            a Home
+            a(href='/') Home
           li
-            a About
+            a(href='/about.html') About
           li
-            a Volunteer
+            a(href='/volunteer.html') Volunteer
           li
-            a Donate
+            a(href='/donate.html') Donate
       .connect
         h5 CONNECT
         ul
@@ -27,13 +27,13 @@ footer
           li
             a Email
       .donate
-        a.btn DONATE
+        a.btn(href='/donate.html') DONATE
     .email-updates
       h5 SIGN UP FOR EMAIL UPDATES
       #mc_embed_signup
-        form#mc-embedded-subscribe-form-footer.validate(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
-          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='Email Address*')
-          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP Code*')
+        form#mc-embedded-subscribe-form-footer.mailchimp(action='http://kimforsenate.us3.list-manage.com/subscribe/post-json?u=3f93b7784bc7878da686ff32e&id=11ec600eb3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='novalidate')
+          input#mce-EMAIL(type='email', value='', name='EMAIL', placeholder='Email Address*', parsley-required='true', , parsley-type='email')
+          input#mce-ZIPCODE(type='text', value='', name='ZIPCODE', placeholder='ZIP Code*', parsley-required='true', parsley-zipcode='true')
           #mce-responses.clear
             #mce-error-response.response(style='display: none;')
             #mce-success-response.response(style='display: none;')
@@ -55,12 +55,3 @@ footer
           a Privacy
         li
           a Contact
-
-// build:js /scripts/main.js
-
-script(src='/bower_components/jquery/jquery.js')
-script(src='/bower_components/jquery.validation/jquery.validate.js')
-script(src='/bower_components/jquery.validation/additional-methods.js')
-script(src='/scripts/main.js')
-
-// endbuild

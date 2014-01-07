@@ -27,50 +27,57 @@ $(document).ready(function() {
     scrollBackgroundImage();
   });
 
-  var validateNewsletterForm = function() {
-    var $form = $('form');
-    if ($form.length > 0) {
-      $form.each(function() {
-        $(this).validate({
-          submitHandler: function() {
-            $.ajax({
-              type: $form.attr('method'),
-              url: $form.attr('action'),
-              data: $form.serialize(),
-              cache       : false,
-              dataType    : 'json',
-              contentType: 'application/json; charset=utf-8',
-              error       : function(err) { alert('Could not connect to the registration server. Please try again later.'); },
-              success     : function(data) {
-                if (data.result != 'success') {
-                  alert(data.msg)
-                }
-              }
-            });
-          },
-          errorPlacement: function(error, element) {
-            return true;
-          },
-          rules: {
-            ZIPCODE: {
-              required: true,
-              digits: true,
-              minlength: 5,
-              maxlength: 5
+  // Newsletter Mailchimp Validation
+  $('form.mailchimp').each(function() {
+    $(this).parsley({
+      trigger: 'submit',
+      validators: {
+        zipcode: function() {
+          return {
+            validate: function(val) {
+              return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(val);
             },
-            EMAIL: {
-              required: true,
-              email: true
-            },
-            PHONE: {
-              required: false,
-              phoneUS: true
-            }
+            priority: 2
+          };
+        }
+      },
+      messages: {
+        zipcode: 'ZIP Code format is invalid.'
+      },
+      errors: {
+        container: function() { return false; }
+      }
+    });
+  });
+
+  $('form.mailchimp').on('submit', function(event) {
+    var $form = $(this);
+    if($form.parsley('validate'))
+    {
+      var $submitButton = $form.find('input[type="submit"]');
+      $submitButton.prop('disabled', true);
+      $.ajax({
+        type: $form.attr('method'),
+        url: $form.attr('action'),
+        data: $form.serialize(),
+        cache       : false,
+        dataType    : 'json',
+        contentType: "application/json; charset=utf-8",
+        error       : function(err) { 
+          alert('Unfortunately an error occured when attempting to subscribe, please try again later.')
+          $submitButton.prop('disabled', false);
+        },
+        success     : function(data) {
+          console.log(data);
+          $submitButton.prop('disabled', false);
+          if (data.result != "success") {
+              
+          } else {
+              window.location.href = "/mail_complete.html";
           }
-        });
+        }
       });
     }
-  };
-
-  validateNewsletterForm();
+    return false;
+  });
 });

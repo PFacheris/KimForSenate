@@ -1,0 +1,83 @@
+extends /layouts/_default
+
+block content
+  .gallery.donation-container(style="background:url('/images/road_bg.jpg');background-repeat:no-repeat;background-position-y:-150px;background-size:150%")
+    .donate
+      .donate-header
+        h1 Become a Contributor
+        p Harry is running for U.S. Senator to achieve the best possible future for Texas and the American people. By chipping in you're helping cover Harry's campaign costs and bringing him closer to fixing Washington.
+      .row.divider
+      .step-header
+        .center
+          h2.header-text Donate Now
+          ul.step-nav
+            li
+              p Amount
+              a.step-link.active(data-step-nav='1') 1
+            li
+              p Donator
+              a.step-link.disabled(data-step-nav='2') 2
+            li
+              p Payment
+              a.step-link.disabled(data-step-nav='3') 3
+      .form-container
+        .step-container
+          p.payment-errors
+          .step.active(data-step='1')
+            form#amount-form
+              .form-row
+                ul.amounts
+                  li
+                    a.btn(data-amount-set='5') $5
+                  li
+                    a.btn(data-amount-set='10') $10
+                  li
+                    a.btn(data-amount-set='20') $20
+                  li
+                    a.btn(data-amount-set='100') $100
+                  li
+                    a.btn(data-amount-set='1000') $1000
+                  li.other
+                    .input-container
+                      input#amount(type='text', name='amount', placeholder='Amount (USD)', parsley-required="true", parsley-currency="true")
+              input.btn(type='submit', value='NEXT')
+          .step(data-step='2')
+            form#info-form
+              .form-row
+                .input-container.name
+                  input#name(type='text', data-stripe='name', placeholder='Name*', parsley-required="true")
+              .form-row
+                .input-container.street
+                  input#street(type='text', data-stripe='address_line1', placeholder='Street*', parsley-required="true")
+              .form-row
+                .input-container.city
+                  input#city(type='text', data-stripe='address_city', placeholder='City*', parsley-required="true")
+                .input-container.state
+                  input#state(type='text', size='2', data-stripe='address_state', placeholder='State*', parsley-required="true", parsley-inlist="AK,AL,AR,AS,AZ,CA,CO,CT,DC,DE,FL,GA,GU,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MH,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,PR,PW,RI,SC,SD,TN,TX,UT,VA,VI,VT,WA,WI,WV,WY,ak,al,ar,as,az,ca,co,ct,dc,de,fl,ga,gu,hi,ia,id,il,in,ks,ky,la,ma,md,me,mh,mi,mn,mo,ms,mt,nc,nd,ne,nh,nj,nm,nv,ny,oh,ok,or,pa,pr,pw,ri,sc,sd,tn,tx,ut,va,vi,vt,wa,wi,wv,wy")
+                .input-container.zip
+                  input#zip(type='text', data-stripe='address_zip', placeholder='ZIP Code*', parsley-required="true", parsley-zipcode="true")
+              input.btn(type='submit', value='NEXT')
+          .step(data-step='3')
+            form#payment-form(action='charge.php', method='POST')
+              .form-row
+                .input-container.number
+                  input#number(type='text', size='20', data-stripe='number', placeholder='Card Number*', parsley-required="true", parsley-luhn="true")
+                .input-container.cvc
+                  input#cvc(type='text', size='4', data-stripe='cvc', placeholder='CVC*', parsley-required="true", parsley-cvc="true")
+              .form-row
+                .input-container.exp-month
+                  input#exp-month(type='text', size='2', data-stripe='exp-month', placeholder='MM*', parsley-required="true", parsley-type="digits", parsley-range="[1, 12]")
+                span  / 
+                .input-container.exp-year
+                  input#exp-year(type='text', size='4', data-stripe='exp-year', placeholder='YYYY*', parsley-required="true", parsley-type="digits")
+              input.btn(type='submit', value='DONATE')
+
+
+block page-specific-js
+  script(type='text/javascript', src='https://js.stripe.com/v2/')
+  script(type='text/javascript')
+    Stripe.setPublishableKey('pk_test_DXF9koDYQF6hhYkRaQkBS5w4');
+
+  // build:js /scripts/donate.js
+  script(type='text/javascript', src='/scripts/donate.js')
+  // endbuild

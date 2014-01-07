@@ -44,6 +44,30 @@ module.exports = function(grunt) {
         tasks: ['jade']
       }
     },
+    php: {
+      server: {
+        options: {
+          port: 9000,
+          hostname: '0.0.0.0',
+          base: [
+            '<%= folders.tmp %>',
+            '<%= folders.app %>'
+          ],
+          open: true,
+          livereload: true
+        }
+      },
+      dist: {
+        options: {
+          port: 9000,
+          hostname: '0.0.0.0',
+          base: '<%= folders.dist %>',
+          open: true,
+          keepalive: true,
+          livereload: false
+        }
+      }
+    },
     connect: {
       options: {
         port: 9000,
@@ -152,13 +176,13 @@ module.exports = function(grunt) {
             '<%= folders.dist %>/scripts/{,*/}*.js',
             '<%= folders.dist %>/styles/{,*/}*.css',
             '<%= folders.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-            '<%= folders.dist %>/styles/fonts/*'
+            '<%= folders.dist %>/fonts/*'
           ]
         }
       }
     },
     useminPrepare: {
-      html: '<%= folders.tmp %>/index.html',
+      html: '<%= folders.tmp %>/donate.html',
       options: {
         dest: '<%= folders.dist %>'
       }
@@ -228,10 +252,11 @@ module.exports = function(grunt) {
           cwd: '<%= folders.app %>',
           dest: '<%= folders.dist %>',
           src: [
-            '*.{ico,txt}',
+            '*.{ico,txt,php}',
             '.htaccess',
             'images/{,*/}*.{webp,gif}',
-            'styles/fonts/*'
+            'styles/fonts/*',
+            'php-lib/**/*'
           ]
         }]
       },
@@ -299,6 +324,19 @@ module.exports = function(grunt) {
       'concurrent:server',
       'connect:server',
       'watch'
+    ]);
+  });
+
+  grunt.registerTask('php-server', function(target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'php:dist']);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'jade',
+      'concurrent:server',
+      'php:server'
     ]);
   });
 
