@@ -53,7 +53,6 @@ module.exports = function(grunt) {
             '<%= folders.tmp %>',
             '<%= folders.app %>'
           ],
-          open: true,
           livereload: true
         }
       },
@@ -62,7 +61,6 @@ module.exports = function(grunt) {
           port: 9000,
           hostname: '0.0.0.0',
           base: '<%= folders.dist %>',
-          open: true,
           keepalive: true,
           livereload: false
         }

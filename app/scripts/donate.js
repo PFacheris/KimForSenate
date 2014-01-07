@@ -1,29 +1,59 @@
 $(document).ready(function() {
+  var $container = $('.form-container');
+  var startLoad = function() {
+    $container.find('.loading').css('display', 'block');
+    $container.find('.step-container').addClass('blur');
+    console.log("boom");
+  };
+
+  var stopLoad = function() {
+    $container.find('.loading').css('display', 'none');
+    $container.find('.step-container').removeClass('blur');
+    console.log("boom-end");
+  };
+
   var $form = $('#payment-form');
   // Stripe
   var stripeResponseHandler = function(status, response) {
-    console.log(response);
-    if (response.error) {
+    if (response.error) 
+    {
       // Show the errors on the form
-      $form.find('.payment-errors').text(response.error.message);
+      $('.payment-errors').text(response.error.message);
       $form.find('input[type="submit"]').prop('disabled', false);
-    } else {
+    } 
+    else 
+    {
       // token contains id, last4, and card type
       var token = response.id;
       // and re-submit
-      $.ajax({
-        type: $form.attr('method'),
-        url: $form.attr('action'),
-        data: { 
-          stripeToken: token,
-          amount: $form.find('input[name="amount"]').val() * 100,
-          name: $form.find('input[name="name"]').val()
-        },
-        success: function(data, status) {
-          console.log(data);
-        },
-        dataType: 'json'
-      });
+      try {
+        $.ajax({
+          type: $form.attr('method'),
+          url: $form.attr('action'),
+          data: {
+            stripeToken: token,
+            amount: $form.find('input[name="amount"]').val() * 100,
+            name: $form.find('input[name="name"]').val()
+          },
+          success: function(data, status, xhr) {
+            window.location.protocol = 'http:';
+            window.location.href = '/donate_complete.html?amount=' + $form.find('input[name="amount"]').val();
+          },
+          error: function(xhr, status, err) {
+            $('.payment-errors').text(err);
+          },
+          complete: function() {
+            stopLoad();
+          },
+          dataType: 'json'
+        });
+      }
+      catch (err)
+      {
+        $('.payment-errors').text("The system may currently be down, please try again later.");
+      }
+
+      $form.find('input[type="submit"]').prop('disabled', false);
     }
   };
 
@@ -98,12 +128,14 @@ $(document).ready(function() {
 
   $('#amount-form').submit(function(event) {
     event.preventDefault();
+    startLoad();
     if($(this).parsley('validate'))
     {
       $('[data-step-nav="2"]').removeClass('disabled').trigger('click');
       $('[data-step="1"] input[type!="submit"]').each(function() {
         $(this).clone().appendTo('[data-step="3"] form').attr('type', 'hidden');
       });
+      stopLoad();
     }
   });
 
@@ -167,10 +199,19 @@ $(document).ready(function() {
           },
           priority: 2
         };
+      },
+      credit: function() {
+        return {
+          validate: function(val) {
+            return Stripe.card.validateCardNumber(val);
+          },
+          priority: 2
+        };
       }
     },
     messages: {
-      cvc: 'CVC should be 3 digits.'
+      cvc: 'CVC should be 3 digits.',
+      credit: 'Number is invalid'
     },
     errors: {
       container: generateErrorContainer
@@ -187,6 +228,7 @@ $(document).ready(function() {
     if($(this).parsley('validate'))
     {
       $form.find('input[type="submit"]').prop('disabled', true);
+      startLoad();
       Stripe.card.createToken($form, stripeResponseHandler);
     }
     return false;

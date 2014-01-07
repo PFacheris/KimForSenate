@@ -1,0 +1,19 @@
+extends /layouts/_default
+
+block content
+  .gallery.thanks-container(style="background:url('/images/fireworks_bg.jpg');background-repeat:no-repeat;background-position-y:-100px;background-size:120%")
+    .thanks
+      h1#amount 
+      p You've brought Harry one step closer to Washington. We appreciate your support.
+
+      a.btn(href='/') RETURN HOME
+
+block page-specific-js
+  script(type='text/javascript')
+    function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    }
+    $(document).ready(function() {
+      $('#amount').text('Thank you for your contribution of $' + getURLParameter('amount'));
+    });
+    

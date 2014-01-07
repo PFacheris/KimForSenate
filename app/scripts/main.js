@@ -64,17 +64,13 @@ $(document).ready(function() {
         dataType    : 'json',
         contentType: "application/json; charset=utf-8",
         error       : function(err) { 
+          console.log(err);
           alert('Unfortunately an error occured when attempting to subscribe, please try again later.')
           $submitButton.prop('disabled', false);
         },
         success     : function(data) {
-          console.log(data);
           $submitButton.prop('disabled', false);
-          if (data.result != "success") {
-              
-          } else {
-              window.location.href = "/mail_complete.html";
-          }
+          window.location.href = "/mail_complete.html";
         }
       });
     }

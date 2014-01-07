@@ -21,6 +21,9 @@ block content
               p Payment
               a.step-link.disabled(data-step-nav='3') 3
       .form-container
+        .loading
+          .loader_back
+            .loader.blue
         .step-container
           p.payment-errors
           .step.active(data-step='1')
@@ -45,7 +48,7 @@ block content
             form#info-form
               .form-row
                 .input-container.name
-                  input#name(type='text', data-stripe='name', placeholder='Name*', parsley-required="true")
+                  input#name(type='text', name='name', data-stripe='name', placeholder='Name*', parsley-required="true")
               .form-row
                 .input-container.street
                   input#street(type='text', data-stripe='address_line1', placeholder='Street*', parsley-required="true")
@@ -61,7 +64,7 @@ block content
             form#payment-form(action='charge.php', method='POST')
               .form-row
                 .input-container.number
-                  input#number(type='text', size='20', data-stripe='number', placeholder='Card Number*', parsley-required="true", parsley-luhn="true")
+                  input#number(type='text', size='20', data-stripe='number', placeholder='Card Number*', parsley-required="true", parsley-credit="true")
                 .input-container.cvc
                   input#cvc(type='text', size='4', data-stripe='cvc', placeholder='CVC*', parsley-required="true", parsley-cvc="true")
               .form-row
@@ -74,6 +77,15 @@ block content
 
 
 block page-specific-js
+  script(type='text/javascript')
+    var loc = window.location+'';
+    var prot = window.location.protocol;
+    if (prot === 'http:'){
+      if (loc.indexOf('0.0.0.0') == -1)
+      {
+        window.location.href = loc.replace('http://','https://');
+      }
+    }
   script(type='text/javascript', src='https://js.stripe.com/v2/')
   script(type='text/javascript')
     Stripe.setPublishableKey('pk_test_DXF9koDYQF6hhYkRaQkBS5w4');
