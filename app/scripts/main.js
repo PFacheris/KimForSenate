@@ -54,25 +54,7 @@ $(document).ready(function() {
     var $form = $(this);
     if($form.parsley('validate'))
     {
-      var $submitButton = $form.find('input[type="submit"]');
-      $submitButton.prop('disabled', true);
-      $.ajax({
-        type: $form.attr('method'),
-        url: $form.attr('action'),
-        data: $form.serialize(),
-        cache       : false,
-        dataType    : 'json',
-        contentType: "application/json; charset=utf-8",
-        error       : function(err) { 
-          console.log(err);
-          alert('Unfortunately an error occured when attempting to subscribe, please try again later.')
-          $submitButton.prop('disabled', false);
-        },
-        success     : function(data) {
-          $submitButton.prop('disabled', false);
-          window.location.href = "/mail_complete.html";
-        }
-      });
+      $form.get(0).submit();
     }
     return false;
   });

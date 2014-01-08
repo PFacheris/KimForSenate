@@ -81,7 +81,7 @@ block page-specific-js
     var loc = window.location+'';
     var prot = window.location.protocol;
     if (prot === 'http:'){
-      if (loc.indexOf('0.0.0.0') == -1)
+      if (loc.indexOf('0.0.0.0') == -1 && loc.indexOf('test.kimforsenate.org') == -1 )
       {
         window.location.href = loc.replace('http://','https://');
       }
