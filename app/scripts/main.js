@@ -17,7 +17,7 @@ $(document).ready(function() {
     var scroll = parseInt($(window).scrollTop());
     var scrollRatio = - (scroll / 5);
     scrollRatio += initialY;
-    $('.gallery').css('background-position', '50% ' + scrollRatio + "px");
+    $('.gallery').css('background-position', '50% ' + scrollRatio + 'px');
   };
 
   scrollBackgroundImage();

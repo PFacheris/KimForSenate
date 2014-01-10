@@ -1,0 +1,10 @@
+AddType application/x-httpd-php54 .php
+Options +FollowSymLinks
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/donate.html$
+RewriteCond %{REQUEST_URI} !^/charge.php$
+RewriteCond %{REQUEST_URI} !^/styles/
+RewriteCond %{REQUEST_URI} !^/scripts/
+RewriteCond %{REQUEST_URI} !^/images/
+RewriteRule (.*) http://kimforsenate.org%{REQUEST_URI} [L,R=301]

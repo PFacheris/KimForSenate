@@ -173,7 +173,7 @@ module.exports = function(grunt) {
           src: [
             '<%= folders.dist %>/scripts/{,*/}*.js',
             '<%= folders.dist %>/styles/{,*/}*.css',
-            '<%= folders.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+            '<%= folders.dist %>/images/{,*/}!(kim2).{png,jpg,jpeg,gif,webp}',
             '<%= folders.dist %>/fonts/*'
           ]
         }
@@ -250,11 +250,11 @@ module.exports = function(grunt) {
           cwd: '<%= folders.app %>',
           dest: '<%= folders.dist %>',
           src: [
-            '*.{ico,txt,php}',
+            '*.{ico,txt}',
             '.htaccess',
             'images/{,*/}*.{webp,gif}',
             'styles/fonts/*',
-            'php-lib/**/*'
+            'secure/**/*'
           ]
         }]
       },
@@ -308,6 +308,12 @@ module.exports = function(grunt) {
         reporter: require('jshint-stylish')
       },
       build: ['<%= folders.app %>/scripts/**/*js']
+    },
+    rename: {
+      secure: {
+        src: '<%= folders.dist %>/donate.html',
+        dest: '<%= folders.dist %>/secure/donate.html'
+      }
     }
   });
 
@@ -358,7 +364,8 @@ module.exports = function(grunt) {
     'copy:dist',
     'copy:assets',
     'rev',
-    'usemin'
+    'usemin',
+    'rename:secure'
   ]);
 
   grunt.registerTask('default', [

@@ -3,25 +3,23 @@ $(document).ready(function() {
   var startLoad = function() {
     $container.find('.loading').css('display', 'block');
     $container.find('.step-container').addClass('blur');
-    console.log("boom");
   };
 
   var stopLoad = function() {
     $container.find('.loading').css('display', 'none');
     $container.find('.step-container').removeClass('blur');
-    console.log("boom-end");
   };
 
   var $form = $('#payment-form');
   // Stripe
   var stripeResponseHandler = function(status, response) {
-    if (response.error) 
+    if (response.error)
     {
       // Show the errors on the form
       $('.payment-errors').text(response.error.message);
       $form.find('input[type="submit"]').prop('disabled', false);
-    } 
-    else 
+    }
+    else
     {
       // token contains id, last4, and card type
       var token = response.id;
@@ -40,7 +38,7 @@ $(document).ready(function() {
             window.location.href = '/donate_complete.html?amount=' + $form.find('input[name="amount"]').val();
           },
           error: function(xhr, status, err) {
-            $('.payment-errors').text(err);
+            $('.payment-errors').text(xhr.responseText);
           },
           complete: function() {
             stopLoad();
@@ -128,14 +126,12 @@ $(document).ready(function() {
 
   $('#amount-form').submit(function(event) {
     event.preventDefault();
-    startLoad();
     if($(this).parsley('validate'))
     {
       $('[data-step-nav="2"]').removeClass('disabled').trigger('click');
       $('[data-step="1"] input[type!="submit"]').each(function() {
         $(this).clone().appendTo('[data-step="3"] form').attr('type', 'hidden');
       });
-      stopLoad();
     }
   });
 
@@ -207,6 +203,19 @@ $(document).ready(function() {
           },
           priority: 2
         };
+      },
+      month: function() {
+        return {
+          validate: function(val) {
+            var $curYear = $form.find('input[name="exp-year"]');
+            if ($curYear.parsley('valid'))
+            {
+              return Stripe.card.validateExpiry(val, $curYear.val());
+            }
+            return true;
+          },
+          priority: 2
+        }
       }
     },
     messages: {
