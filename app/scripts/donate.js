@@ -30,8 +30,14 @@ $(document).ready(function() {
           url: $form.attr('action'),
           data: {
             stripeToken: token,
-            amount: $form.find('input[name="amount"]').val() * 100,
-            name: $form.find('input[name="name"]').val()
+            amount: $form.find('input[name="amount"]').val(),
+            name: $form.find('input[name="name"]').val(),
+            street: $form.find('input[name="street"]').val(),
+            city: $form.find('input[name="city"]').val(),
+            state: $form.find('input[name="state"]').val(),
+            zip: $form.find('input[name="zip"]').val(),
+            employer: $form.find('input[name="employer"]').val(),
+            occupation: $form.find('input[name="occupation"]').val()
           },
           success: function(data, status, xhr) {
             window.location.protocol = 'http:';
@@ -152,6 +158,14 @@ $(document).ready(function() {
         return {
           validate: function(val) {
             return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(val);
+          },
+          priority: 2
+        };
+      },
+      state: function() {
+        return {
+          validate: function(val) {
+            return /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/.test(val);
           },
           priority: 2
         };

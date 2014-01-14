@@ -14,17 +14,25 @@ Stripe::setApiKey("sk_live_o8KN1FwjTmitbdmk7Kv6f8ZX");
 $token = $_POST['stripeToken'];
 $amount = $_POST['amount'];
 $name = $_POST['name'];
+$street = $_POST['street'];
+$city = $_POST['city'];
+$state = $_POST['state'];
+$zip = $_POST['zip'];
+$employer = $_POST['employer'];
+$occupation = $_POST['occupation'];
 
 // Check if fields are set
-if(!isset($token) || !isset($amount) || !isset($name))
+if(!isset($token) || !isset($amount) || !isset($name) || !isset($employer)  || !isset($occupation))
 {
   exit;
 }
 
+$headers = "From: no-reply@kimforsenate.org\r\n";
+date_default_timezone_set('America/Chicago');
 // Create the charge on Stripe's servers - this will charge the user's card
 try {
   $charge = Stripe_Charge::create(array(
-    "amount" => $amount, // amount in cents, again
+    "amount" => intval(doubleval($amount) * 100), // amount in cents, again
     "currency" => "usd",
     "card" => $token,
     "description" => "Donation by " . $name)
@@ -32,13 +40,15 @@ try {
   // Send result
   http_response_code(200);
   echo $charge;
+  $body = "DONATION RECEIVED FROM:\nName: " . $name . "\n" . "Amount (USD): $" . $amount . "\n" . "Street Address: " . $street . "\n" . "City: " . $city . "\n" . "State: " . $state . "\n" . "ZIP Code: " . $zip . "\n" . "Employer: " . $employer . "\n" . "Occupation: " . $occupation . "\n";
+  mail('donations@kimforsenate.org', 'Donation from ' . $name . ' on ' . date("m/d/Y"), $body, $headers);
 } catch(Stripe_CardError $e) {
   // Since it's a decline, Stripe_CardError will be caught
   $body = $e->getJsonBody();
   $err  = $body['error'];
 
   http_response_code(500);
-  echo 'An error occured when processing your card: ' . $err['type'] . ', Code ' . $err['code'] . ', ' . $err['message'] . "\n";
+  echo 'An error occured when processing your card: ' . $err['message'] . "\n";
   exit;
 } catch (Stripe_InvalidRequestError $e) {
   // Malformed request.
@@ -47,7 +57,7 @@ try {
 
   http_response_code(500);
   echo 'An error occured on our end, please report this to us immediately.' . "\n";
-  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err));
+  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err), $headers);
   exit;
 } catch (Stripe_AuthenticationError $e) {
   // Authentication with Stripe's API failed
@@ -57,7 +67,7 @@ try {
 
   http_response_code(500);
   echo 'An error occured on our end, please report this to us immediately.' . "\n";
-  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err));
+  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err), $headers);
   exit;
 } catch (Stripe_ApiConnectionError $e) {
   // Network communication with Stripe failed
@@ -72,13 +82,13 @@ try {
 
   http_response_code(500);
   echo 'Generic error occured, please report this to admin@kimforsenate.org.' . "\n";
-  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err));
+  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', json_encode($err), $headers);
   exit;
 } catch (Exception $e) {
   // Something else happened, completely unrelated to Stripe
   http_response_code(500);
-  echo 'Something is broken on our end, we\'re working hard to fix it!' . "\n";
-  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', 'GENERIC ERROR: \n' . json_encode($e));
+  echo "Something is broken on our end, we're working hard to fix it!" . "\n";
+  mail('admin@kimforsenate.org', '[ERROR] CHARGE.PHP', 'GENERIC ERROR: \n' . json_encode($e), $headers);
   exit;
 }
 ?>
