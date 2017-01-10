@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://manage.stripe.com/account
-Stripe::setApiKey("sk_live_o8KN1FwjTmitbdmk7Kv6f8ZX");
+Stripe::setApiKey("");
 
 // Get the details submitted by the form
 $token = $_POST['stripeToken'];
